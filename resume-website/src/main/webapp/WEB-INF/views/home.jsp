@@ -15,7 +15,20 @@
 
 <c:set var="req" value="${pageContext.request}" />
 
-<c:set var="baseURL" value="${req.scheme}://${req.serverName}${req.contextPath}" />
+<c:set var="idiom" value="" />
+
+<c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
+
+
+<c:if test="${(param['idiom'] == 'PORTUGUES') or (empty param['idiom'] and locale == 'PORTUGUES')}">
+	<c:set var="idiom" value="PORTUGUES" />
+</c:if>
+        
+<c:if test="${(param['idiom'] == 'ENGLISH') or (empty param['idiom'] and locale == 'ENGLISH')}">     
+	<c:set var="idiom" value="ENGLISH" />
+</c:if>
+
+
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
@@ -25,20 +38,16 @@
     <title>Eduardo Crestani</title>
     <!-- Meta -->
     <meta charset="utf-8">
-    <meta http-equiv="expires" content = "${expireDate}" />
+    <meta http-equiv="expires" content="${expireDate}" />
     <meta http-equiv="content-language" content="pt-br, en-US" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Eduardo Crestani's resume">
+    <meta name="description" content="Eduardo Crestani Software Engineer Resume">
     <meta name="author" content="Eduardo Crestani">    
     <link rel="shortcut icon" href="${img}/favicon.ico">  
     <link href='${css}/google-fonts.css' rel='stylesheet' type='text/css'>
-    <!-- Global CSS -->
     <link rel="stylesheet" href="${plugins}/bootstrap/css/bootstrap.min.css">   
-    <!-- Plugins CSS -->
     <link rel="stylesheet" href="${plugins}/font-awesome/css/font-awesome.css">
-    
-    <!-- Theme CSS -->  
     <link id="theme-style" rel="stylesheet" href="${css}/styles.css">
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,13 +55,14 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+ 
 </head> 
 
 <body>
     <div class="wrapper">
         <div class="sidebar-wrapper">
             <div class="profile-container">
-                <img src="${images}/profile.png" alt="" class="img-circle"/>
+                <img src="${images}/myphoto.JPG" alt="" class="img-circle"/>
                 <h1 class="name">${cv.cv.name}</h1>
                 <h3 class="tagline">${cv.cv.role}</h3>
             </div><!--//profile-container-->
@@ -130,14 +140,14 @@
 
         <div style="position:relative;right:-80%;margin-top:-1%;width:30%;height:62px;">
         
-          <c:if test="${empty param['idiom'] or param['idiom'] != 'ENGLISH'}">
-	            <a href="${baseURL}/?idiom=ENGLISH"> <img src="${img}/english-version.png"/></a>
-	            <a href="${baseURL}/?idiom=ENGLISH">english version</a>
+          <c:if test="${idiom == 'PORTUGUES'}">
+	            <a href="${baseURL}/idiom/ENGLISH"> <img src="${img}/english-version.png"/></a>
+	            <a href="${baseURL}/idiom/ENGLISH">english version</a>
           </c:if>
           
-          <c:if test="${param['idiom']=='ENGLISH'}">
-	            <a href="${baseURL}/?idiom=PORTUGUES"> <img src="${img}/portuguese-version.png"/></a> 
-	            <a href="${baseURL}/?idiom=PORTUGUES">portuguese version</a>
+          <c:if test="${idiom == 'ENGLISH'}">
+	            <a href="${baseURL}/idiom/PORTUGUES"> <img src="${img}/portuguese-version.png"/></a> 
+	            <a href="${baseURL}/idiom/PORTUGUES">portuguese version</a>
           </c:if>
           
         </div>
@@ -215,7 +225,7 @@
                         <div class="item">
 	                        <h3 class="level-title">${skill.name}</h3>
 	                        <div class="level-bar">
-	                            <div class="level-bar-inner" data-level="${skill.percent}%">
+	                            <div class="level-bar-inner" data-level="${skill.percent}%" style="width:${skill.percent}%;">
 	                            </div>                                      
 	                        </div><!--//level-bar-->                                 
 	                    </div><!--//item-->
@@ -234,23 +244,23 @@
         </div><!--//container-->
     </footer><!--//footer-->
  
-    <!-- Javascript -->          
-    <script type="text/javascript" src="${plugins}/jquery-1.11.3.min.js"></script>  
-    <script type="text/javascript" src="${plugins}/bootstrap/js/bootstrap.min.js"></script>    
-    <!-- custom js -->
-    <script type="text/javascript" src="${js}/main.js"></script>       
+    <script type="text/javascript" src="${js}/main.js"></script>         
     
     <script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-		
-		  ga('create', 'UA-88351650-1', 'auto');
-		  ga('send', 'pageview');
+    	if(checkUrl('https://www.google-analytics.com/analytics.js')){
+    
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-88351650-1', 'auto');
+			  ga('send', 'pageview');
 
+    	}
 	</script>
-         
+    <!--  script type="text/javascript" src="${plugins}/jquery-1.11.3.min.js"></script>   -->
+     <!--  script type="text/javascript" src="${plugins}/bootstrap/js/bootstrap.min.js"></script>     -->
 </body>
 </html> 
 
