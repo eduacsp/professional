@@ -27,15 +27,15 @@ public class JPAConfiguration {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		
 		driverManagerDataSource.setUsername("root");
-		driverManagerDataSource.setPassword("Augusto1977");//Augusto1977
+		driverManagerDataSource.setPassword("NononNonon");
 		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/eduacspcom");
-		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");//com.mysql.jdbc.Driver
+		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		
 		factoryBean.setDataSource(driverManagerDataSource);
 		
 		Properties props = new Properties();
-		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");//org.hibernate.dialect.MySQL5Dialect
-		props.setProperty("hibernate.show_sql", "false");
+		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		props.setProperty("hibernate.show_sql", "true");
 		props.setProperty("hibernate.hbm2ddl.auto", "validate");	
 		
 		factoryBean.setJpaProperties(props);
