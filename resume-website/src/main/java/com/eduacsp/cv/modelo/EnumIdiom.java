@@ -1,8 +1,8 @@
 package com.eduacsp.cv.modelo;
 
 public enum EnumIdiom {
-	PORTUGUES("Português"),
-	ENGLISH("English");
+	PORTUGUES("PORTUGUES"),
+	ENGLISH("ENGLISH");
 	
 	private String value;
 	

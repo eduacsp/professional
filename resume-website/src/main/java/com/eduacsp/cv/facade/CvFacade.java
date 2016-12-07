@@ -9,7 +9,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eduacsp.cv.cache.CacheUtil;
 import com.eduacsp.cv.dao.CvDao;
@@ -32,7 +36,7 @@ public class CvFacade implements Cvitae{
 	private static Cvitae INSTANCE = new CvFacade();
 
 	@SuppressWarnings("unchecked")
-	public CvVo getCv(CvDao cvDao,EnumIdiom idiom){
+	public ModelAndView getCv(CvDao cvDao,String idiom){
 		CvVo cvVo = new CvVo();
 		Cv cv = new Cv();
 		List<Cv> listaCv = new ArrayList<Cv>();
@@ -45,23 +49,21 @@ public class CvFacade implements Cvitae{
 		Set<Skill> setSkill = null;
 		Set<Interest> setInterest = null;
 		Cache cacheCv = CacheUtil.getCacheCv();
+		ModelAndView modelAndView = new ModelAndView("home");
+		EnumIdiom enumIdiom = getIdiom(LocaleContextHolder.getLocale(),idiom);
 
-		if(idiom ==null){
-			idiom = EnumIdiom.PORTUGUES;
-		}
-
-		if(idiom.equals(EnumIdiom.PORTUGUES)){
+		if(enumIdiom.equals(EnumIdiom.PORTUGUES)){
 			formatSDF = new SimpleDateFormat("MM/yyyy");
-		}else if(idiom.equals(EnumIdiom.ENGLISH)){
+		}else if(enumIdiom.equals(EnumIdiom.ENGLISH)){
 			formatSDF = new SimpleDateFormat("yyyy-MM");
 		}
 
 		if(cvDao!=null){
-			if(cacheCv.isKeyInCache("listaCv-"+idiom.getValue())){
-				listaCv = (List<Cv>) cacheCv.get("listaCv-"+idiom.getValue()).getObjectValue();
+			if(cacheCv.isKeyInCache("listaCv-"+enumIdiom.getValue())){
+				listaCv = (List<Cv>) cacheCv.get("listaCv-"+enumIdiom.getValue()).getObjectValue();
 			}else{
-				listaCv = cvDao.listarCv(idiom);
-				cacheCv.put(new Element("listaCv-"+idiom.getValue(),listaCv));
+				listaCv = cvDao.listarCv(enumIdiom);
+				cacheCv.put(new Element("listaCv-"+enumIdiom.getValue(),listaCv));
 			}
 		}
 
@@ -70,11 +72,11 @@ public class CvFacade implements Cvitae{
 		}
 
 		if(cvDao!=null){
-			if(cacheCv.isKeyInCache("listaPerson-"+idiom.getValue())){
-				listaPerson = (List<Person>) cacheCv.get("listaPerson-"+idiom.getValue()).getObjectValue();
+			if(cacheCv.isKeyInCache("listaPerson-"+enumIdiom.getValue())){
+				listaPerson = (List<Person>) cacheCv.get("listaPerson-"+enumIdiom.getValue()).getObjectValue();
 			}else{
 				listaPerson = cvDao.listarPerson();
-				cacheCv.put(new Element("listaPerson-"+idiom.getValue(),listaPerson));
+				cacheCv.put(new Element("listaPerson-"+enumIdiom.getValue(),listaPerson));
 			}
 		}
 
@@ -83,15 +85,8 @@ public class CvFacade implements Cvitae{
 		}
 
 		setEducation = setEducation(cv, formatSDF);
-		setExperience = setExperience(cv, formatSDF,idiom);
-
-		if(setExperience!=null && setExperience.size()>0){
-			for (Experience experience : setExperience) {
-				System.out.println("getText:"+experience.getText());
-			}
-		}
-
-		setLanguage = setLanguageSkills(cv,idiom);
+		setExperience = setExperience(cv, formatSDF,enumIdiom);
+		setLanguage = setLanguageSkills(cv,enumIdiom);
 		setSkill = setSkills(cv);
 		setInterest = setInterest(cv);
 
@@ -103,10 +98,35 @@ public class CvFacade implements Cvitae{
 		cvVo.setCv(cv);
 		cvVo.setPerson(person);
 		cvVo.setExpireDate(getExpireDate());
+		cvVo.setLocale(enumIdiom.getValue());
+		
+		modelAndView.addObject("cv",cvVo);
+		modelAndView.addObject("expireDate",cvVo.getExpireDate());
+		modelAndView.addObject("locale",enumIdiom.getValue());
 
-		return cvVo;
+		return modelAndView;
 	}
 
+	private static EnumIdiom getIdiom(Locale locale, String idiom) {
+		EnumIdiom idiomReturn = null;
+		Locale localeBrasil = new Locale("pt","BR","");
+		Locale localePortugal = new Locale("pt","PT","");
+
+		if(idiom==null || (!EnumIdiom.PORTUGUES.getValue().equals(idiom) && !EnumIdiom.ENGLISH.getValue().equals(idiom))){
+			if(locale==null || localeBrasil.equals(locale) || localePortugal.equals(locale)){
+				idiomReturn = EnumIdiom.PORTUGUES;
+			}else{
+				idiomReturn = EnumIdiom.ENGLISH;
+			}
+		}else{
+			if(EnumIdiom.PORTUGUES.getValue().equals(idiom)){
+				idiomReturn = EnumIdiom.PORTUGUES;
+			}else if(EnumIdiom.ENGLISH.getValue().equals(idiom)){
+				idiomReturn = EnumIdiom.ENGLISH;
+			}
+		}
+		return idiomReturn;
+	}
 
 	private Set<Interest> setInterest(Cv cv) {
 		List<Interest> listInterest = null;
@@ -246,7 +266,7 @@ public class CvFacade implements Cvitae{
 	public static Cvitae getInstance(){
 		return INSTANCE;
 	}
-	
+
 	private String getExpireDate(){
 		String dtStr = "";//Mon, 22 jul 2006 11:12:01 GMT
 		Date dt = new Date();
@@ -257,5 +277,8 @@ public class CvFacade implements Cvitae{
 		dtStr = new SimpleDateFormat("E, dd M yyyy HH:mm:ss").format(dt);
 		return dtStr+" GMT";
 	}
+
+
+
 
 }

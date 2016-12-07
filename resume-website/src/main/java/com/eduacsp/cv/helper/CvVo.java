@@ -1,7 +1,5 @@
 package com.eduacsp.cv.helper;
 
-import java.util.Date;
-
 import com.eduacsp.cv.modelo.Cv;
 import com.eduacsp.cv.modelo.Person;
 
@@ -12,6 +10,8 @@ public class CvVo {
 	private Person person;
 	
 	private String expireDate;
+	
+	private String locale;
 	
 	public Cv getCv() {
 		return cv;
@@ -35,6 +35,14 @@ public class CvVo {
 
 	public void setExpireDate(String expireDate) {
 		this.expireDate = expireDate;
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+
+	public void setLocale(String locale) {
+		this.locale = locale;
 	}
 	
 	

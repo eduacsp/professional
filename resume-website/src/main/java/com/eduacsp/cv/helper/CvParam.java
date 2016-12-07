@@ -1,21 +1,15 @@
 package com.eduacsp.cv.helper;
 
-import com.eduacsp.cv.modelo.EnumIdiom;
-
 public class CvParam {
 
-	private EnumIdiom idiom;
+	private String idiom;
 
-	public EnumIdiom getIdiom() {
+	public String getIdiom() {
 		return idiom;
 	}
 
-	public void setIdiom(EnumIdiom idiom) {
+	public void setIdiom(String idiom) {
 		this.idiom = idiom;
 	}
-
-
-	
-	
 	
 }
