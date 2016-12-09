@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,10 +25,12 @@ import com.eduacsp.cv.modelo.Education;
 import com.eduacsp.cv.modelo.EnumIdiom;
 import com.eduacsp.cv.modelo.EnumLanguageProficiency;
 import com.eduacsp.cv.modelo.Experience;
+import com.eduacsp.cv.modelo.Guest;
 import com.eduacsp.cv.modelo.Interest;
 import com.eduacsp.cv.modelo.Language;
 import com.eduacsp.cv.modelo.Person;
 import com.eduacsp.cv.modelo.Skill;
+import com.eduacsp.cv.util.IpUtil;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
@@ -107,6 +111,17 @@ public class CvFacade implements Cvitae{
 		return modelAndView;
 	}
 
+	public void insertGuestLog(CvDao cvDao, HttpServletRequest request, String idiom){
+		Guest guest = new Guest();
+		guest.setIpAddress(IpUtil.getIpAddr(request));
+		guest.setReferer(IpUtil.getReferer(request));
+		guest.setUserAgent(IpUtil.getUserAgent(request));
+		guest.setIdiom(idiom);
+		guest.setDateInsert(Calendar.getInstance());
+	
+		cvDao.insertGuestLog(guest);
+	}
+	
 	private static EnumIdiom getIdiom(Locale locale, String idiom) {
 		EnumIdiom idiomReturn = null;
 		Locale localeBrasil = new Locale("pt","BR","");

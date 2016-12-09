@@ -1,5 +1,7 @@
 package com.eduacsp.cv.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,14 +24,18 @@ public class HomeController{
 	private Cvitae cvFacade = CvFacade.getInstance();
 	
 	@RequestMapping("/")
-	public ModelAndView index(@ModelAttribute(value="CvParam") CvParam cvParam){
+	public ModelAndView index(@ModelAttribute(value="CvParam") CvParam cvParam,HttpServletRequest request){
+		
+		cvFacade.insertGuestLog(cvDao, request,cvParam.getIdiom());
 		
 		return cvFacade.getCv(cvDao,cvParam.getIdiom());
 	}
 	
 	@RequestMapping(value="/idiom/{idiom}", method=RequestMethod.GET)
-	public ModelAndView getIdiom(@PathVariable("idiom") String idiom){
+	public ModelAndView getIdiom(@PathVariable("idiom") String idiom,HttpServletRequest request){
 
+		cvFacade.insertGuestLog(cvDao, request,idiom);
+		
 		return cvFacade.getCv(cvDao,idiom);
 	}
 	

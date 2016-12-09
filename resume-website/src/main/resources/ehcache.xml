@@ -7,11 +7,11 @@
 	<diskStore path="java.io.tmpdir" />
 
 	<cache name="cvCache"
-		maxEntriesLocalHeap="10000"
-		maxEntriesLocalDisk="1000"
+		maxEntriesLocalHeap="100000"
+		maxEntriesLocalDisk="10000"
 		eternal="false"
-		diskSpoolBufferSizeMB="500"
-		timeToIdleSeconds="100000" timeToLiveSeconds="108000"
+		diskSpoolBufferSizeMB="1000"
+		timeToIdleSeconds="100000" timeToLiveSeconds="604800"
 		memoryStoreEvictionPolicy="LFU"
 		transactionalMode="off">
 		<persistence strategy="localTempSwap" />

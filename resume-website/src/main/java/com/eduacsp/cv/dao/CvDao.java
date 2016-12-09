@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eduacsp.cv.modelo.Cv;
 import com.eduacsp.cv.modelo.EnumIdiom;
+import com.eduacsp.cv.modelo.Guest;
 import com.eduacsp.cv.modelo.Person;
 
 @Repository
@@ -25,6 +26,10 @@ public class CvDao {
 
 	public List<Person> listarPerson() {
 		return manager.createQuery("select c from Person c where c.idPerson=1",Person.class).getResultList();
+	}
+
+	public void insertGuestLog(Guest guest) {
+		manager.persist(guest);
 	}
 
 	
