@@ -4,11 +4,11 @@
 	monitoring="autodetect"
 	dynamicConfig="true">
 
-	<diskStore path="java.io.tmpdir" />
+	<diskStore path="/home/bootapp/tmp" />
 
 	<cache name="cvCache"
-		maxEntriesLocalHeap="100000"
-		maxEntriesLocalDisk="10000"
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="100000"
 		eternal="false"
 		diskSpoolBufferSizeMB="1000"
 		timeToIdleSeconds="100000" timeToLiveSeconds="604800"

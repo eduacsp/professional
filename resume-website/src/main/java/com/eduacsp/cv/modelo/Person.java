@@ -1,7 +1,7 @@
 package com.eduacsp.cv.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,11 +32,11 @@ public class Person implements Serializable{
 	
 	@OneToMany(mappedBy = "person", targetEntity = Cv.class, cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	@Column(name="cv")
-	private List<Cv> cv;
+	private Set<Cv> cv;
 	
 	@OneToMany(mappedBy = "person", targetEntity = Contact.class, cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	@Column(name="contact")
-	private List<Contact> contact;
+	private Set<Contact> contact;
 	
 	
 	public Long getIdPerson() {
@@ -63,21 +63,22 @@ public class Person implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public List<Cv> getCv() {
+	public Set<Cv> getCv() {
 		return cv;
 	}
 
-	public void setCv(List<Cv> cv) {
+	public void setCv(Set<Cv> cv) {
 		this.cv = cv;
 	}
 
-	public List<Contact> getContact() {
+	public Set<Contact> getContact() {
 		return contact;
 	}
 
-	public void setContact(List<Contact> contact) {
+	public void setContact(Set<Contact> contact) {
 		this.contact = contact;
 	}
+
 	
 	
 	

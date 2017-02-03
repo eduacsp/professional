@@ -1,7 +1,6 @@
 package com.eduacsp.cv.modelo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -35,6 +34,15 @@ public class Guest implements Serializable{
 	
 	@Column(name="idiom")
 	private String idiom;
+	
+	@Column(name="city")
+	private String city;
+	
+	@Column(name="region")
+	private String region;
+	
+	@Column(name="country")
+	private String country;
 	
 	@Temporal(value=TemporalType.TIMESTAMP)
 	@Column(name="date_insert")
@@ -86,6 +94,30 @@ public class Guest implements Serializable{
 
 	public void setDateInsert(Calendar dateInsert) {
 		this.dateInsert = dateInsert;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 

@@ -28,7 +28,8 @@ education_title VARCHAR(300) NULL,
 interests_title VARCHAR(300) NULL,
 language_title VARCHAR(300) NULL,
 id_person BIGINT(20) UNSIGNED,
-FOREIGN KEY (id_person) REFERENCES person(id_person)
+FOREIGN KEY (id_person) REFERENCES person(id_person),
+INDEX(idiom)
 );
 
 CREATE TABLE experience (
@@ -92,6 +93,9 @@ ip_address VARCHAR(300) NULL,
 user_agent VARCHAR(300) NULL,
 referer VARCHAR(300) NULL,
 idiom VARCHAR(300) NULL,
+city VARCHAR(500) NULL,
+region VARCHAR(500) NULL,
+country VARCHAR(500) NULL,
 date_insert TIMESTAMP DEFAULT '0000-00-00 00:00:00'
 );
 
@@ -101,7 +105,7 @@ insert into cv (id_cv,career_profile_text,career_profile_title,experiences_title
 
 insert into cv (id_cv,career_profile_text,career_profile_title,experiences_title,name,role,skills_title,idiom,id_person,education_title,interests_title,language_title) values (2,'Software engineering. Development of complex applications with high performance. Use of the best programming paradigms, patterns, frameworks and agile methodologies. I have experience more than 14 years with backend and frontend software development and more than 9 years with Java EE. Also I have EU passport.','Career Profile','Experiences','Eduardo Crestani','Software Engineer','Skills & Proficiency','ENGLISH',1,'EDUCATION','INTERESTS','LANGUAGES');		
 
-insert into contact (text,label,type,id_person) values ('eduacsp@outlook.com','eduacsp@outlook.com','EMAIL',1);
+insert into contact (text,label,type,id_person) values ('eduacspbr@gmail.com','eduacspbr@gmail.com','EMAIL',1);
 
 insert into contact (text,label,type,id_person) values ('http://br.linkedin.com/pub/eduardo-crestani/16/259/587','Linkedin','LINKEDIN',1);	
 
@@ -135,21 +139,21 @@ insert into experience (company, location, from_date, to_date, role_title, until
 
 insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('SupportComm','São Paulo, Brasil',STR_TO_DATE('08/01/2016', '%m/%d/%Y'),STR_TO_DATE('08/31/2100', '%m/%d/%Y'),'Desenvolvedor Sr','Y',1,'Desenvolvimento de aplicações web na área de marketing mobile; Implementação de melhorias de performance e usabilidade; Criação de testes unitários automatizados;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('UOL','São Paulo, Brasil',STR_TO_DATE('11/01/1999', '%m/%d/%Y'),STR_TO_DATE('12/31/2002', '%m/%d/%Y'),'Junior Support Analyst','N',2,'Telephone support to customers; Web application development;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('UOL','São Paulo, Brazil',STR_TO_DATE('11/01/1999', '%m/%d/%Y'),STR_TO_DATE('12/31/2002', '%m/%d/%Y'),'Junior Support Analyst','N',2,'Telephone support to customers; Web application development;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Giant Cargo','São Paulo, Brasil',STR_TO_DATE('07/01/2003', '%m/%d/%Y'),STR_TO_DATE('04/30/2007', '%m/%d/%Y'),'Engineer Programmer','N',2,'Development projects for the area of foreign trade; Implementation of high-availability architecture, both in software and hardware; Support for servers;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Giant Cargo','São Paulo, Brazil',STR_TO_DATE('07/01/2003', '%m/%d/%Y'),STR_TO_DATE('04/30/2007', '%m/%d/%Y'),'Engineer Programmer','N',2,'Development projects for the area of foreign trade; Implementation of high-availability architecture, both in software and hardware; Support for servers;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Accenture','São Paulo, Brasil',STR_TO_DATE('06/01/2007', '%m/%d/%Y'),STR_TO_DATE('07/31/2007', '%m/%d/%Y'),'Engineer Java Programmer','N',2,'Web application development for the baking area.');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Accenture','São Paulo, Brazil',STR_TO_DATE('06/01/2007', '%m/%d/%Y'),STR_TO_DATE('07/31/2007', '%m/%d/%Y'),'Engineer Java Programmer','N',2,'Web application development for the baking area.');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Capgemini','São Paulo, Brasil',STR_TO_DATE('08/01/2007', '%m/%d/%Y'),STR_TO_DATE('05/31/2010', '%m/%d/%Y'),'Senior Systems Analyst','N',2,'Development projects and support for web applications in the publishing area; Definition of software architecture; Java teaching and trainees mentoring;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Capgemini','São Paulo, Brazil',STR_TO_DATE('08/01/2007', '%m/%d/%Y'),STR_TO_DATE('05/31/2010', '%m/%d/%Y'),'Senior Systems Analyst','N',2,'Development projects and support for web applications in the publishing area; Definition of software architecture; Java teaching and trainees mentoring;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Resource Tecnology','São Paulo, Brasil',STR_TO_DATE('06/01/2010', '%m/%d/%Y'),STR_TO_DATE('10/31/2014', '%m/%d/%Y'),'Senior Analyst','N',2,'Development projects and support for web and desktop applications; Implementation of data encryption routines and integration of legacy software; Definition of software architecture; Building codes with improved performance;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Resource Tecnology','São Paulo, Brazil',STR_TO_DATE('06/01/2010', '%m/%d/%Y'),STR_TO_DATE('10/31/2014', '%m/%d/%Y'),'Senior Analyst','N',2,'Development projects and support for web and desktop applications; Implementation of data encryption routines and integration of legacy software; Definition of software architecture; Building codes with improved performance;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Disys','São Paulo, Brasil',STR_TO_DATE('11/01/2014', '%m/%d/%Y'),STR_TO_DATE('11/29/2015', '%m/%d/%Y'),'Senior Java System Analyst','N',2,'Web development projects in the insurance area; Improvements on performance and usability; Building automated unit testing; Team leadership;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Disys','São Paulo, Brazil',STR_TO_DATE('11/01/2014', '%m/%d/%Y'),STR_TO_DATE('11/29/2015', '%m/%d/%Y'),'Senior Java System Analyst','N',2,'Web development projects in the insurance area; Improvements on performance and usability; Building automated unit testing; Team leadership;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Entelgy','São Paulo, Brasil',STR_TO_DATE('12/01/2015', '%m/%d/%Y'),STR_TO_DATE('08/31/2016', '%m/%d/%Y'),'Programmer Analyst Expert','N',2,'Fullstack web development projects and support for portal applications; Building codes with improved performance; Technical leadership;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('Entelgy','São Paulo, Brazil',STR_TO_DATE('12/01/2015', '%m/%d/%Y'),STR_TO_DATE('08/31/2016', '%m/%d/%Y'),'Programmer Analyst Expert','N',2,'Fullstack web development projects and support for portal applications; Building codes with improved performance; Technical leadership;');
 
-insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('SupportComm','São Paulo, Brasil',STR_TO_DATE('08/01/2016', '%m/%d/%Y'),STR_TO_DATE('08/31/2100', '%m/%d/%Y'),'Senior Java Developer ','Y',2,'Web development projects in the mobile marketing; Improvements on performance and usability; Building automated unit testing;');
+insert into experience (company, location, from_date, to_date, role_title, until_now, id_cv, text) values ('SupportComm','São Paulo, Brazil',STR_TO_DATE('08/01/2016', '%m/%d/%Y'),STR_TO_DATE('08/31/2100', '%m/%d/%Y'),'Senior Java Developer ','Y',2,'Web development projects in the mobile marketing; Improvements on performance and usability; Building automated unit testing;');
 		
 insert into skill (name,percent,id_cv) values ('JEE',100.0,1);
 
@@ -179,7 +183,7 @@ insert into skill (name,percent,id_cv) values ('SAP Netweaver',50.0,1);
 
 insert into skill (name,percent,id_cv) values ('Hibernate',85.0,1);
 
-insert into skill (name,percent,id_cv) values ('Spring MVC / Boot',70.0,1);
+insert into skill (name,percent,id_cv) values ('Spring Boot',80.0,1);
 
 insert into skill (name,percent,id_cv) values ('Spring IoC',90.0,1);
 
@@ -191,7 +195,9 @@ insert into skill (name,percent,id_cv) values ('Gradle',30.0,1);
 
 insert into skill (name,percent,id_cv) values ('Git',60.0,1);
 
-insert into skill (name,percent,id_cv) values ('EJB',65.0,1);
+insert into skill (name,percent,id_cv) values ('EJB',70.0,1);
+
+insert into skill (name,percent,id_cv) values ('SOA/Restful webservices',90.0,1);
 
 insert into skill (name,percent,id_cv) values ('JEE',100.0,2);
 
@@ -221,7 +227,7 @@ insert into skill (name,percent,id_cv) values ('SAP Netweaver',50.0,2);
 
 insert into skill (name,percent,id_cv) values ('Hibernate',85.0,2);
 
-insert into skill (name,percent,id_cv) values ('Spring MVC / Boot',75.0,2);
+insert into skill (name,percent,id_cv) values ('Spring Boot',80.0,2);
 
 insert into skill (name,percent,id_cv) values ('Spring IoC',90.0,2);
 
@@ -233,7 +239,9 @@ insert into skill (name,percent,id_cv) values ('Gradle',30.0,2);
 
 insert into skill (name,percent,id_cv) values ('Git',60.0,2);
 
-insert into skill (name,percent,id_cv) values ('EJB',65.0,2);
+insert into skill (name,percent,id_cv) values ('EJB',70.0,2);
+
+insert into skill (name,percent,id_cv) values ('SOA/Restful webservices',90.0,2);
 
 insert into interest (name,id_cv) values ('Leitura',1);
 
