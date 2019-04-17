@@ -1,0 +1,10 @@
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/controller/FaleMaisController.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/service/FaleMaisService.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/config/Config.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/repo/PrecoRepository.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/config/Application.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/repo/PlanoRepository.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/model/Plano.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/vo/ParamVo.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/model/Preco.java
+/home/eduardo/git_pessoal/professional/calcplanos-test/src/main/java/com/eduacsp/test/calcplanos/vo/RetornoValoresVo.java

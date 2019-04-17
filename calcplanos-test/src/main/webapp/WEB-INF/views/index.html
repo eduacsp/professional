@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>CalcPlanos Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+table {
+	border-collapse: collapse;
+}
+
+.table_erro {
+	border: 0px;
+	color: red;
+	width: 100%;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+	<div id="body_main"
+		style="margin: auto; width: 25%; border: 1px solid gray; padding: 10px; text-align: center;">
+
+		<h1>CalcPlanos Test</h1>
+		<br> <br> <strong>Cálculo de Planos</strong> <br>
+
+
+		<div th:if="${retornoValores.listErros != null}">
+			<br>
+			<div style="color: red;">
+				<strong>Erros:</strong>	<br><br>
+	
+				<table style="width:100%;">
+				        <tr th:each="erros : ${retornoValores.listErros}">
+				            <td style="text-align: center;"><span th:text="${erros}" class="table_erro"></td>
+				        </tr>
+				</table>
+				
+				
+			</div>
+		</div>
+		<br>
+
+		<form action="#" th:action="@{/calcularPlanos}" th:object="${paramVo}"
+			method="post">
+			<p>
+				Origem: <input type="text" th:field="*{origem}" />
+			</p>
+			<p>
+				Destino: <input type="text" th:field="*{destino}" />
+			</p>
+			<p>
+				Tempo: <input type="text" th:field="*{tempo}" />
+
+			</p>
+			<p>
+				Plano: <select name="plano">
+					<option th:value="'0'" th:text="' '"></option>
+					<option th:each="plano : ${listPlano}" th:value="${plano.codigo}"
+						th:text="${plano.nome}" />
+				</select>
+			</p>
+			<p>
+				<input type="submit" value="Calcular" />
+			</p>
+		</form>
+		<br>
+	</div>
+
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>CalcPlanos Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+table {
+	border-collapse: collapse;
+}
+
+.table_erro {
+	border: 0px;
+	color: red;
+	width: 100%;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+	<div id="body_main"
+		style="margin: auto; width: 45%; border: 1px solid gray; padding: 10px; text-align: center;">
+
+		<h1>CalcPlanos Test</h1>
+		<br>
+
+		<div th:if="${retornoValores.listErros == null}">
+		
+			<table border="0" style="width: 100%;">
+				<tr style="background-color: #4CAF50; color: white;border: 1px solid black;">
+					<td><strong>Origem</strong></td>
+					<td><strong>Destino</strong></td>
+					<td><strong>Tempo</strong></td>
+					<td><strong>Plano FaleMais</strong></td>
+					<td><strong>Com FaleMais</strong></td>
+					<td><strong>Sem FaleMais</strong></td>
+				</tr>
+				<tr style="border: 1px solid black;">
+					<td th:text="${retornoValores.origem}" />
+					<td th:text="${retornoValores.destino}" />
+					<td th:text="${retornoValores.tempo}" />
+					<td th:text="${retornoValores.plano}" />
+					<td th:text="${#numbers.formatCurrency(retornoValores.comFaleMais)}" />
+					<td th:text="${#numbers.formatCurrency(retornoValores.semFaleMais)}" />
+				</tr>
+			</table>
+			
+		</div>
+
+		<br> <br>
+
+	</div>
+
+</body>
+</html>
+
